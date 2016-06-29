@@ -12,9 +12,22 @@ class RedColorCell: UITableViewCell {
     
 }
 
-struct ABCCellBinder: CellBinder {
+struct RedColorCellBinder: CellBinder {
     static func bind(view: RedColorCell, withData d: String) {
-        view.textLabel?.text = "CellBinder " + d
+        view.textLabel?.text = "RedColorCell " + d
+        view.backgroundColor = UIColor.redColor();
+    }
+}
+
+
+class BlueColorCell: UITableViewCell {
+    
+}
+
+struct BlueColorCellBinder: CellBinder {
+    static func bind(view: BlueColorCell, withData d: Int) {
+        view.textLabel?.text = "BlueColorCell \(d)"
+        view.backgroundColor = UIColor.blueColor()
     }
 }
 
