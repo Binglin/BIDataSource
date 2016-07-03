@@ -1,5 +1,6 @@
 # BIDataSource
-a wrapper of UITableViewDataSource and UITableViewDelegate of UITableView
+
+a protocol oriented  wrapper of UITableViewDataSource and UITableViewDelegate of UITableView
 
 
 ``` objective-cØ

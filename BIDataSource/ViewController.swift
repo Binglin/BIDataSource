@@ -27,7 +27,6 @@ class ViewController: UIViewController , TableViewDataSource, ListDataProtocol, 
             "CellConfigureProtocol:cell use only once",
             "ListBinderProtocol user multiple times",
             "dynamic cells: ReusableViewDataTypeController",
-            "GenericDataTableViewController"
         ])
         self.tableView.setBIDataSource(self)
         self.tableView.setBIDelegate(self)
@@ -51,7 +50,7 @@ class ViewController: UIViewController , TableViewDataSource, ListDataProtocol, 
             self.navigationController?.pushViewController(ReusableViewDataTypeController(), animated: true)
             break
         case 3:
-            self.navigationController?.pushViewController(GenericDataTableViewController(), animated: true)
+
             break
         default:
             break
@@ -114,7 +113,7 @@ class ListBinderProtocolViewController: UIViewController , ListDataProtocol, Lis
 
 class ReusableViewDataTypeController: UIViewController, SectionDataProtocol, TableViewDataSource , UITableViewDelegate{
     
-    var items: [[ReusableViewDataType]] = []
+    var items: [[ReusableViewData]] = []
     
     var tableView = UITableView()
     
@@ -124,15 +123,15 @@ class ReusableViewDataTypeController: UIViewController, SectionDataProtocol, Tab
         self.tableView.queueIn(RedColorCell)
         self.tableView.queueIn(BlueColorCell)
         
+        let redCell = RowItem<RedColorCellBinder>(identifier: nil, data: "red") { (view, indexPath, data) in
+            
+        }
         
-        self.items.append([
-            RowItem<RedColorCellBinder>(identifier: nil, data: "", viewFactory: nil),
-            RowItem<BlueColorCellBinder>(identifier: nil, data: 123, viewFactory: { (view, indexPath, data) in
-                view.backgroundColor = UIColor.orangeColor()
-            })
-        ])
-    
+        let blueCell = RowItem<BlueColorCellBinder>(identifier: nil, data: 3, viewFactory: nil)
         
+        let sectionDatas : [ReusableViewData] = [redCell, blueCell]
+        self.items.append(sectionDatas);
+
         self.tableView.setBIDataSource(self)
         self.tableView.delegate   = self
     }
@@ -150,39 +149,5 @@ class ReusableViewDataTypeController: UIViewController, SectionDataProtocol, Tab
     }
 }
 
-
-class GenericDataTableViewController: UIViewController , SectionDataProtocol, TableViewDataSource{
-    
-    var tableView = UITableView()
-    
-    var items: [[ReusableViewDataType]] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addSubview(self.tableView)
-        self.tableView.queueIn(RedColorCell)
-        self.tableView.queueIn(BlueColorCell)
-        
-        
-        self.items.append([
-            RowDataItem<RedColorCell, String>(data: "abc", identifier: String(RedColorCell)),
-            RowDataItem<BlueColorCell, Int>(data: 123, identifier: String(BlueColorCell))
-            ])
-        self.tableView.setBIDataSource(self)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableView.frame = self.view.bounds
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 60
-        }
-        return 100
-    }
-
-}
 
 

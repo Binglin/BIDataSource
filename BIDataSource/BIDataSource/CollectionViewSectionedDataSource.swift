@@ -36,7 +36,7 @@ public extension CollectionViewDataSource where Self: SectionADataProtocol{
 
 
 
-extension CollectionViewDataSource where Self: SectionDataProtocol, Self.Element == ReusableViewDataType{
+extension CollectionViewDataSource where Self: SectionDataProtocol, Self.Element == ReusableViewData{
     func tableView(tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell{
         let item = self.dataAt(indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier(item.identifier)!

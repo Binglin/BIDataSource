@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+/* 适用场景： 需要 HeightCacheProtocol */
 public protocol TableViewDelegate{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -48,5 +48,6 @@ class _BITableViewDelegate: NSObject, UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.delegate.tableView(tableView, didSelectRowAtIndexPath: indexPath)
     }
+    
 }
 
